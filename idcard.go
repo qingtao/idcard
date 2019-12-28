@@ -18,7 +18,7 @@ func sum(b []byte) (n int) {
 	return n
 }
 
-// checkCode 计算最校验码
+// checkCode 计算校验码
 func checkCode(s []byte) int {
 	return sum(s) % 11
 }
