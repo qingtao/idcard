@@ -1,3 +1,3 @@
 module github.com/qingtao/idcard
 
-go 1.13
+go 1.16
