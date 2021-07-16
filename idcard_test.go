@@ -1,6 +1,7 @@
 package idcard
 
 import (
+	"strconv"
 	"testing"
 )
 
@@ -184,51 +185,41 @@ func Test_validate(t *testing.T) {
 }
 
 func Benchmark_Validate(b *testing.B) {
-	b.Run("1", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
-			Validate("34052419800101001X", 1)
-		}
-	})
-
-	b.Run("2", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
-			Validate("370683198901117657", 1)
-		}
-	})
-
-	b.Run("3", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
-			Validate("370683198901117657")
-		}
-	})
-	b.Run("4", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
-			Validate("身份证号校验")
-		}
-	})
-	b.Run("5", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
-			Validate("37068319890111657")
-		}
-	})
-
-	b.Run("6", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
-			Validate("abc6*3198901117657")
-		}
-	})
+	type args struct {
+		idcard string
+		gender int
+	}
+	tests := []args{
+		{"34052419800101001X", 1},
+		{"370683198901117657", 1},
+		{"370683198901117657", 0},
+		{"身份证号校验", 0},
+		{"37068319890111657", 0},
+		{"abc6*3198901117657", 0},
+	}
+	for ii, tt := range tests {
+		var ok bool
+		b.Run(strconv.Itoa(ii), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				ok = Validate(tt.idcard, tt.gender)
+			}
+		})
+		b.Log(ok)
+	}
 }
 
 func Benchmark_validate(b *testing.B) {
-	b.Run("1", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
-			validate([]byte("34052419800101001X"))
-		}
-	})
-
-	b.Run("2", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
-			validate([]byte("370683198901117657"))
-		}
-	})
+	tests := [][]byte{
+		[]byte("34052419800101001X"),
+		[]byte("370683198901117657"),
+	}
+	for ii, tt := range tests {
+		var ok bool
+		b.Run(strconv.Itoa(ii), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				ok = validate(tt)
+			}
+		})
+		b.Log(ok)
+	}
 }
