@@ -37,14 +37,8 @@ func Validate(s string, gender ...int) bool {
 	if len(s) != 18 {
 		return false
 	}
-
-	if len(gender) == 0 {
-		return validate([]byte(s))
-	}
-
-	if int(s[16]-'0')&0x1 != gender[0]&0x1 {
+	if len(gender) != 0 && int(s[16]-'0')&0x1 != gender[0]&0x1 {
 		return false
 	}
-
 	return validate([]byte(s))
 }

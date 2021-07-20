@@ -87,6 +87,14 @@ func Test_Validate(t *testing.T) {
 			},
 			want: false,
 		},
+		{
+			// 这是号码能过规则, 但是是一个无效的
+			name: "9",
+			args: args{
+				s: "372925198811050000",
+			},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
