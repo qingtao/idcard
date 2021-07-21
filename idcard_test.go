@@ -30,15 +30,15 @@ func Test_Validate(t *testing.T) {
 		{
 			name: "1",
 			args: args{
-				s:      "34052419800101001X",
+				s:      "11010519491231002X",
 				gender: []int{0},
 			},
-			want: false,
+			want: true,
 		},
 		{
 			name: "2",
 			args: args{
-				s:      "370683198901117657",
+				s:      "440524188001010014",
 				gender: []int{1},
 			},
 			want: true,
