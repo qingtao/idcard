@@ -1,21 +1,26 @@
 package idcard
 
 import (
+	"fmt"
 	"strconv"
 	"testing"
 )
 
-// func TestMatch(t *testing.T) {
-// 	var a = []string{
-// 		"34052419800101001X",
-// 		"370683198901117657",
-// 		"370683198901007657",
-// 	}
-// 	for _, s := range a {
-// 		ss := re.FindStringSubmatch(s)
-// 		t.Logf("%+v\n", ss)
-// 	}
-// }
+func ExampleValidate() {
+	var (
+		s      = "11010519491231002X"
+		gender = 0
+	)
+	fmt.Printf("Validate(%s): %t\n", s, Validate(s))
+	fmt.Printf("Validate(%s, %d): %t\n", s, gender, Validate(s, gender))
+	ok, got := GetGender(s)
+	fmt.Printf("GetGender(%s): %t, %d", s, ok, got)
+
+	// Output:
+	// Validate(11010519491231002X): true
+	// Validate(11010519491231002X, 0): true
+	// GetGender(11010519491231002X): true, 0
+}
 
 func Test_Validate(t *testing.T) {
 	type args struct {
