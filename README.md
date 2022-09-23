@@ -8,8 +8,15 @@
 
 go get github.com/qingtao/idcard@latest
 
-
 ```go
+package main
+
+import (
+    "fmt"
+    "github.com/qingtao/idcard"
+)
+
+func main() {
 	var (
 		s      = "11010519491231002X"
 		gender = 0
@@ -23,4 +30,5 @@ go get github.com/qingtao/idcard@latest
 	// Validate(11010519491231002X): true
 	// Validate(11010519491231002X, 0): true
 	// GetGender(11010519491231002X): true, 0
-``
+}
+```
