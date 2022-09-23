@@ -44,3 +44,15 @@ func Validate(s string, gender ...int) bool {
 	}
 	return validate([]byte(s))
 }
+
+// GetGender 从身份号码中提取性别, 如果是男性返回1,女性返回0, 如果身份证号码不符合规则, 则返回-1,
+func GetGender(s string) (bool, int) {
+	if len(s) != 18 {
+		return false, -1
+	}
+	ok := validate([]byte(s))
+	if !ok {
+		return false, -1
+	}
+	return true, int(s[16]-'0') & 0x1
+}
